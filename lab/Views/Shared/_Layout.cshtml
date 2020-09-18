@@ -5,23 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Lab</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~lib/font-awesome/css/all.css" />
 </head>
 <body>
-    <header>
+    <header class="fixed-top">
         <div class="container">
-            <!-- Панель навигации -->
-            <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-                <!-- меню сайта -->
+            
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+                
                 <a class="navbar-brand" href="#">Shupranova</a>
                 <div class="navbar-nav">
                     <a class="nav-item nav-link active" asp-controller="Home" asp-action="Index">Lab 2</a>
-                    <a class="nav-item nav-link" asp-controller="Product" asp-action="Index">Каталог</a>
-                    <a class="nav-item nav-link" asp-controller="Admin" asp-action="/Index">Администрирование</a>
+                    <a class="nav-item nav-link" asp-controller="Product" asp-action="Index">Catalog</a>
+                    <a class="nav-item nav-link" asp-controller="Admin" asp-action="/Index">Admin</a>
                 </div>
-                <!-- меню сайта - конец -->
-                <!-- Информация пользователя -->
+                
                 <a asp-controller="Cart" asp-action="Index" class="navbar-text ml-auto">
                     00,0 руб <i class="fas fa-shopping-cart nav-color"></i> (0)
                 </a>
@@ -40,16 +39,16 @@
                             user@mail.ru
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" asp-controller="Cart" aspaction="Index">Мои товары</a>
-                        <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout">Log off</a>
+                        <a class="dropdown-item" asp-controller="Cart" aspaction="Index">My Products</a>
+                        <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
                     </div>
                 </div>
-                <!-- Информация пользователя - конец -->
-            </nav> <!-- Панель навигации - конец -->
-        </div><!-- container - конец -->
+                
+            </nav>
+        </div>
     </header>
 
-    <main class="container">
+    <main class="container has-padding-t-b">
         @RenderBody()
     </main>
 
