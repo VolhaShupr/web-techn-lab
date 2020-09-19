@@ -11,17 +11,10 @@
 <body>
     <header class="fixed-top">
         <div class="container">
-            
             <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-
-                <a class="navbar-brand" href="#">Shupranova</a>
-                <div class="navbar-nav">
-                    @await Component.InvokeAsync("Menu")
-                </div>
-
-                <!-- Информация пользователя -->
+                <a class="navbar-brand" href="/">Shupranova</a>
+                @await Component.InvokeAsync("Menu")
                 <partial name="_UserPartial" />
-                <!-- Информация пользователя - конец -->
             </nav>
         </div>
     </header>
