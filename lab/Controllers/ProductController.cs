@@ -1,4 +1,5 @@
 ﻿using lab.DAL.Entities;
+using lab.Extensions;
 using lab.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -19,6 +20,8 @@ namespace lab.Controllers
             SetupData();
         }
 
+        [Route("Product")]
+        [Route("Product/Page_{page}")]
         public IActionResult Index(int? group, int page = 1)
         {
             //Поместить список групп во ViewData 
@@ -28,7 +31,12 @@ namespace lab.Controllers
 
             var filteredItems = _instruments.Where(item => !group.HasValue || item.GroupId == group.Value);
 
-            return View(ListViewModel<MusInstrument>.GetModel(filteredItems, page, _pageSize));
+            var model = ListViewModel<MusInstrument>.GetModel(filteredItems, page, _pageSize);
+
+            if (Request.IsAjaxRequest())
+                return PartialView("_listpartial", model);
+            else
+                return View(model);
         }
 
         ///<summary>

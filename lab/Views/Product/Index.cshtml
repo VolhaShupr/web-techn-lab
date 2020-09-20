@@ -6,7 +6,8 @@
     var categories = ViewData["Groups"] as IEnumerable<MusInstrumentGroup>; 
     int currentGroup = (int)ViewData["CurrentGroup"];
 
-    var text = currentGroup != 0 ? categories.FirstOrDefault(g => g.Id == currentGroup)?.Name : "All";
+    var allCategoriesText = "All";
+    var text = currentGroup != 0 ? categories.FirstOrDefault(g => g.Id == currentGroup)?.Name : allCategoriesText;
 }
 
 <div class="row">
@@ -21,7 +22,7 @@
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" asp-action="Index" asp-controller="Product">
-                    All
+                    @allCategoriesText
                 </a>
 
                 @foreach (var item in categories)
@@ -36,11 +37,15 @@
         </div>
     </div>
     <div class="col-10">
-        <div class="card-deck cust-card-desk-max-width">
-            @foreach (var item in Model)
-            {
-                <partial name="_ListItemPartial" model="@item" />
-            }
+        <div class="card-deck cust-card-desk-max-width" id="list">
+            <partial name="_ListPartial" model="@Model"/>
         </div>
+        
+        <pager page-current="@Model.CurrentPage"
+               page-total="@Model.TotalPages"
+               action="Index"
+               controller="Product"
+               group-id="@currentGroup">
+        </pager>
     </div>
 </div>
