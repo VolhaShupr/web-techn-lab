@@ -1,0 +1,68 @@
+﻿@page "{id:int}"
+@model lab.Areas.Admin.Pages.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>MusInstrument</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MusInstrument.Id" />
+
+            <div class="form-group">
+                @if (!string.IsNullOrEmpty(Model.MusInstrument.Image))
+                {
+                    <img src=~/images/@Model.MusInstrument.Image alt="NoSuchFile" width="150" />
+                }
+                else
+                {
+                    <h4>Image is not found</h4>
+                }
+                <div class="custom-file mt-3">
+                    <input type="file" class="custom-file-input" asp-for="Image" id="customFile">
+                    <label class="custom-file-label" for="customFile"> Choose a file </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="MusInstrument.Name" class="control-label"></label>
+                <input asp-for="MusInstrument.Name" class="form-control" />
+                <span asp-validation-for="MusInstrument.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MusInstrument.Description" class="control-label"></label>
+                <input asp-for="MusInstrument.Description" class="form-control" />
+                <span asp-validation-for="MusInstrument.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MusInstrument.Brand" class="control-label"></label>
+                <input asp-for="MusInstrument.Brand" class="form-control" />
+                <span asp-validation-for="MusInstrument.Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MusInstrument.GroupId" class="control-label"></label>
+                <select asp-for="MusInstrument.GroupId" class="form-control" asp-items="ViewBag.GroupId"></select>
+                <span asp-validation-for="MusInstrument.GroupId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts{
+    <script src="~/js/bs-custom-file-input.js"></script>
+    <script>
+        bsCustomFileInput.init();
+    </script>
+}

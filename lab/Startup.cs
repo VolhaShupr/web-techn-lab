@@ -14,6 +14,9 @@ using Microsoft.Extensions.Hosting;
 using lab.DAL.Entities;
 using lab.DAL.Data;
 using lab.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using lab.Models;
 
 namespace lab
 {
@@ -48,6 +51,16 @@ namespace lab
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+            services.AddDistributedMemoryCache(); 
+            services.AddSession(opt => {
+                opt.Cookie.HttpOnly = true;
+                opt.Cookie.IsEssential = true;
+            });
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<Cart>(sp => CartService.GetCart(sp));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,6 +84,7 @@ namespace lab
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
