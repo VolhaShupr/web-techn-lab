@@ -1,41 +1,46 @@
-﻿@model IEnumerable<MusInstrument>
+﻿@model ListViewModel<MusInstrument>
 
 @{
     ViewData["Title"] = "Menu";
+
+    var categories = ViewData["Groups"] as IEnumerable<MusInstrumentGroup>; 
+    int currentGroup = (int)ViewData["CurrentGroup"];
+
+    var text = currentGroup != 0 ? categories.FirstOrDefault(g => g.Id == currentGroup)?.Name : "All";
 }
 
 <div class="row">
-    <div class="card-deck cust-card-desk-max-width">
-        @foreach (var item in Model)
-        {
-            <div class='card m-2 p-1 text-center col-4 cust-card-min-width'>
-                <img src="~/Images/@item.Image" alt='NoImage' class="card-img-top cust-card-img-cover" />
-                <div class="card-body d-flex flex-column justify-content-between">
-                    <h5 class="card-title">
-                        @item.Name
-                    </h5>
-                    <p class="card-text overflow-hidden text-truncate text-nowrap">
-                        @item.Description
-                    </p>
-                    <div class="align-bottom">
-                        <div class="card-text badge badge-secondary">
-                            <h6>@item.Brand</h6>
+    <div class="col-2">
+        <div class="dropdown mt-2">
+            <a class="btn btn-secondary dropdown-toggle" 
+               asp-action="Index" asp-controller="Product"
+               role="button" id="dropdownMenuLink" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                @text
+            </a>
 
-                        </div>
-                        @{
-                            // Получение текущего адреса
-                            var request = ViewContext.HttpContext.Request;
-                            var returnUrl = request.Path + request.QueryString.ToUriComponent();
-                        }
-                        <!--Разметка кнопки добавления в корзину-->
-                        <p class="mt-2">
-                            <a asp-action="Add" asp-controller="Cart" asp-route-id="@item.Id" asp-route-returnUrl="@returnUrl" class="btn btn-primary">
-                                <i class="fa fa-shopping-cart"></i> To Card
-                            </a>
-                        </p>
-                    </div>
-                </div>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" asp-action="Index" asp-controller="Product">
+                    All
+                </a>
+
+                @foreach (var item in categories)
+                {
+                    <a class="dropdown-item"
+                       asp-action="Index" asp-controller="Product" 
+                       asp-route-group="@item.Id" asp-route-page="1">
+                        @item.Name
+                    </a>
+                }
             </div>
-        }
+        </div>
+    </div>
+    <div class="col-10">
+        <div class="card-deck cust-card-desk-max-width">
+            @foreach (var item in Model)
+            {
+                <partial name="_ListItemPartial" model="@item" />
+            }
+        </div>
     </div>
 </div>

@@ -1,22 +1,34 @@
 ﻿using lab.DAL.Entities;
+using lab.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace lab.Controllers
 {
     public class ProductController : Controller
     {
-        List<MusInstrument> _instruments;
+        public List<MusInstrument> _instruments;
         List<MusInstrumentGroup> _instrumentGroups;
+
+        int _pageSize;
 
         public ProductController()
         {
+            _pageSize = 3;
             SetupData();
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? group, int page = 1)
         {
-            return View(_instruments);
+            //Поместить список групп во ViewData 
+            ViewData["Groups"] = _instrumentGroups;
+            //Получить id текущей группы и поместить в TempData
+            ViewData["CurrentGroup"] = group ?? 0;
+
+            var filteredItems = _instruments.Where(item => !group.HasValue || item.GroupId == group.Value);
+
+            return View(ListViewModel<MusInstrument>.GetModel(filteredItems, page, _pageSize));
         }
 
         ///<summary>
