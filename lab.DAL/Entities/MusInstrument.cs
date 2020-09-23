@@ -9,12 +9,12 @@ namespace lab.DAL.Entities
         public string Description { get; set; } 
         public string Brand { get; set; } 
         public string Image { get; set; }
+        public double Price { get; set; }
 
         //Навигационные свойства
         /// <summary>
         /// группа
         /// </summary>
-
         public int GroupId { get; set; }
         public MusInstrumentGroup Group { get; set; }
     }

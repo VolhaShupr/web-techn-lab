@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace lab.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private ApplicationDbContext _context; 
@@ -24,7 +25,6 @@ namespace lab.Controllers
             return View(_cart.Items.Values);
         }
 
-        [Authorize]
         public IActionResult Add(int id, string returnUrl)
         {
             _cart = HttpContext.Session.Get<Cart>(cartKey); 

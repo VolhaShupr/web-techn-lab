@@ -1,4 +1,6 @@
-﻿<a asp-controller="Cart" asp-action="Index" class="navbar-text ml-auto">
-    00,0 руб.(0)
+﻿@model lab.Models.Cart
+
+<a asp-controller="Cart" asp-action="Index" class="navbar-text ml-auto">
+    @Model.Total $ (@Model.Count)
     <i class="fa fa-shopping-cart nav-color"></i>
 </a>

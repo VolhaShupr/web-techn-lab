@@ -21,12 +21,15 @@ namespace lab.Models
         }
 
         ///<summary>
-        ///Количество калорий
+        ///Сумма
         ///</summary>
-        //public int Calories
-        //{
-        //    get { return Items.Sum(item => item.Value.Quantity * item.Value.Dish.Calories); }
-        //}
+        public double Total
+        {
+            get {
+                var sum = Items.Sum(item => item.Value.Quantity * item.Value.MusInstrument.Price);
+                return Items.Sum(item => item.Value.Quantity * item.Value.MusInstrument.Price); 
+            }
+        }
 
         ///<summary>
         ///Добавление в корзину

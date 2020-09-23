@@ -13,7 +13,7 @@ namespace lab.Components
 
         public IViewComponentResult Invoke()
         {
-            return View();
+            return View(_cart);
         }
     }
 }

@@ -78,27 +78,32 @@ namespace lab.Services
                     new MusInstrument {
                         Name="Kalimba",
                         Description="17 keys kalimba",
-                        Brand = "VBH", GroupId=6, Image="kalimba.png"
+                        Brand = "VBH", GroupId=6, Image="kalimba.png",
+                        Price = 20
                     },
                     new MusInstrument {
                         Name="Octopus soprano ukulele - sky blue",
                         Description="Fitted with Aquila Nylgut strings",
-                        Brand = "Octopus", GroupId=1, Image="ukulele.jpeg"
+                        Brand = "Octopus", GroupId=1, Image="ukulele.jpeg",
+                        Price = 50.99
                     },
                     new MusInstrument {
                         Name="Hangpan Drum HD1",
                         Description="MEINL Sonic Energy Harmonic Art Handpan instruments are hand made one at a time using top grade german steel.",
-                        Brand = "Meinl", GroupId=4, Image="hangpan.png"
+                        Brand = "Meinl", GroupId=4, Image="hangpan.png",
+                        Price = 1200
                     },
                     new MusInstrument {
                         Name="Hurdy Gurdy w/Gig Bag",
                         Description="Amaze your friends with the mechanical operation of the Hurdy Gurdy",
-                        Brand ="hurdfin", GroupId=5, Image="hurdy_gurdy.jpg"
+                        Brand ="hurdfin", GroupId=5, Image="hurdy_gurdy.jpg",
+                        Price = 1399
                     },
                     new MusInstrument {
                         Name="Rainstick",
                         Description="The Meinl RS1BK-L Rainstick is a rainstick, made from bamboo, and comes in black. Natural Bamboo makes these rainsticks produce a pleasant effect offering plenty of projection and a long sustain. They can also be played as if they are large shakers.",
-                        Brand ="Meinl", GroupId=6, Image="rainstick.jpg"
+                        Brand ="Meinl", GroupId=6, Image="rainstick.jpg",
+                        Price = 30
                     }
 
                 });

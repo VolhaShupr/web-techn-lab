@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using lab.DAL.Data;
 using lab.DAL.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace lab.Areas.Admin.Pages
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly lab.DAL.Data.ApplicationDbContext _context;

@@ -38,7 +38,7 @@ namespace lab
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
             services
-                .AddIdentity<ApplicationUser, IdentityRole>(options =>
+                .AddIdentity<ApplicationUser, IdentityRole>((IdentityOptions options) =>
             {
                 options.SignIn.RequireConfirmedAccount = false; 
                 options.Password.RequireLowercase = false; 
@@ -58,7 +58,13 @@ namespace lab
                 opt.Cookie.IsEssential = true;
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-            
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+            });
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<Cart>(sp => CartService.GetCart(sp));
         }
