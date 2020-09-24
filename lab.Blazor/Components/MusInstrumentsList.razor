@@ -1,0 +1,44 @@
+﻿@using lab.Blazor.Data
+
+<h3>Music Instruments List</h3>
+
+@if (MusInstruments == null)
+{
+    <p>Loading ...</p>
+}
+else
+{
+    <div class="list-group">
+        @{
+            var i = 1;
+            foreach (var musInstrument in MusInstruments)
+            {
+                <button type="button" 
+                        class="list-group-item list-group-item-action	@(SelectedId == musInstrument.Id ? "active" : "")"
+                        @onclick="@(e => Selected(e, musInstrument.Id))">
+                    @(i++) - @musInstrument.Name
+                </button>
+            }
+        }
+    </div>
+}
+
+@code {
+    [Parameter]
+    public IEnumerable<MusInstrumentListViewModel> MusInstruments { get; set; }
+
+    [Parameter]
+    public EventCallback<IEnumerable<MusInstrumentListViewModel>> MusInstrumentsChanged { get; set; }
+
+    private int SelectedId = 0;
+
+    [Parameter]
+    public EventCallback<int> SelectedObjectChanged { get; set; }
+
+    private void Selected(MouseEventArgs e, int id)
+
+    {
+        SelectedId = id;
+        SelectedObjectChanged.InvokeAsync(id);
+    }
+}

@@ -1,0 +1,29 @@
+﻿@using lab.Blazor.Data
+
+@if (MusInstrument != null)
+{
+    <img src="@imageSrc" class="img-thumbnail" width="150" />
+    <div>
+        <p>@MusInstrument.Name - @MusInstrument.Description</p>
+        <div class="badge badge-info ">@MusInstrument.Price $</div>
+    </div>
+
+}
+
+@code {
+
+    [Parameter]
+    public MusInstrumentDetailsViewModel MusInstrument { get; set; }
+
+    [Parameter]
+    public EventCallback<MusInstrumentDetailsViewModel> MusInstrumentChanged { get; set; }
+
+    string imageSrc
+    {
+        get
+        {
+            return $"https://localhost:44321/images/{MusInstrument.Image}";
+        }
+    }
+
+}
